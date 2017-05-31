@@ -1,0 +1,47 @@
+The repo consits of three folders - code, results and documents
+
+Requirements
+
+1) The basic requirements to port KVM on Arndale Exynos development board are:
+
+An Arndale board with power and serial cable (ethernet also advised)
+
+MicroSD card (4 GB recommended)
+
+Personal computer with Ubuntu 12.04 LTS or similar distribution
+
+2) In order to create a basic bootable system on the Arndale Exynos development board, we need the following:
+
+ Cross compiler and required packages
+
+ Host Linux kernel
+
+ Device Tree Blob
+
+ Bootloader
+
+ Filesystem
+
+3) Download following additional packages
+
+$ sudo apt-get install build-essential git u-boot-tools qemu-user-static libncurses5-dev
+
+$ sudo apt-get install gcc-arm-linux-gnueabi
+
+4) Follow configuration steps in shell scripts under code section.
+
+5) Bootup the host using
+
+$ env edit bootargs
+$     root=/dev/mmcblk1p1 rw rootwait earlyprintk console=ttySAC2,115200n8 --no-log
+$ env edit bootcmd
+$     mmc read 40007000 451 2000;mmc read 42000000 2451 100;bootm 40007000 - 42000000
+$ env save
+$ boot
+
+
+References: http://www.virtualopensystems.com/en/solutions/guides/kvm-virtualization-on-arndale/
+
+
+
+
